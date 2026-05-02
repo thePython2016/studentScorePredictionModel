@@ -7,7 +7,7 @@ import pickle
 # # pickle.dump(combined,open("combined.pkl","wb"))
 
 gModel=pickle.load(open("model.pkl","rb"))
-combined=pickle.load(open("Transformer.pkl","rb"))
+combined=pickle.load(open("transformer.pkl","rb"))
 st.title("Score Prediction Model")
 
 tab1,tab2=st.tabs(['User Input','Upload File'])
