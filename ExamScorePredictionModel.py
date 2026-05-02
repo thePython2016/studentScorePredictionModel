@@ -6,7 +6,7 @@ import pickle
 # pickle.dump(gModel,open("gModel.pkl","wb"))
 # # pickle.dump(combined,open("combined.pkl","wb"))
 
-gModel=pickle.load(open("Model.pkl","rb"))
+gModel=pickle.load(open("model.pkl","rb"))
 combined=pickle.load(open("Transformer.pkl","rb"))
 st.title("Score Prediction Model")
 
