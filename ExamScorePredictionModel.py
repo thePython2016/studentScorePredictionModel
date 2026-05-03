@@ -36,10 +36,9 @@ with tab1:
                 st.success(f"Predicted Score: {actualScore}")
             
 with tab2:
-    file=st.file_uploader("upload CSV",type="csv")
-    buttonFile=st.button("Predict")
+    file = st.file_uploader("upload CSV", type="csv")
+    buttonFile = st.button("Predict")
     
-
     if buttonFile:
         if file is None:
             st.error("Please Upload a File")
@@ -48,20 +47,29 @@ with tab2:
                 # 1. Read the file
                 fileFrame = pd.read_csv(file)
                 
-                # 2. Transform and Predict
+                # 2. Handle outliers ✅
+                for col in fileFrame.select_dtypes(include=["float64", "int64"]).columns:
+                    Q1 = fileFrame[col].quantile(0.25)
+                    Q3 = fileFrame[col].quantile(0.75)
+                    IQR = Q3 - Q1
+                    if IQR == 0 or pd.isna(IQR):
+                        continue
+                    Lower = Q1 - 1.5 * IQR
+                    Upper = Q3 + 1.5 * IQR
+                    fileFrame[col] = fileFrame[col].clip(Lower, Upper)
+
+                # 3. Transform and Predict
                 fileTransform = combined.transform(fileFrame)
                 predictFile = gModel.predict(fileTransform)
                 actualScore = np.expm1(predictFile)
                 
-                # 3. Handle results
+                # 4. Handle results
                 if len(actualScore) == 1:
-                    # Single prediction display
                     st.success(f"Predicted Score: {actualScore[0]:.2f}")
                 else:
-                    # Bulk prediction display (Add column and show table)
                     fileFrame['Predicted Score'] = actualScore.round(2)
                     st.success(f"Successfully predicted scores for {len(fileFrame)} rows!")
-                    st.dataframe(fileFrame) # This creates an interactive table
+                    st.dataframe(fileFrame)
                     
             except Exception as e:
                 st.error(f"Error: {e}")
