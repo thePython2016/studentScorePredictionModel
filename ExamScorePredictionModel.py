@@ -31,7 +31,7 @@ with tab1:
             transform=combined.transform(df)
             predict=gModel.predict(transform)
             actualScore=np.expm1(predict)
-            st.success(actualScore)
+            st.success(f"Predicted Score: {actualScore}")
             
 with tab2:
     file=st.file_uploader("upload CSV",type="csv")
@@ -45,7 +45,7 @@ with tab2:
             fileTransform=combined.transform(fileFrame)
             predictFile=gModel.predict(fileTransform)
             actualScore=np.expm1(predictFile)
-            st.success(actualScore)
+            st.success(f"Predicted Score: {actualScore}")
 
 
 
