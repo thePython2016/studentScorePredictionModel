@@ -9,7 +9,7 @@ import pickle
 
 gModel=pickle.load(open("model.pkl","rb"))
 combined=pickle.load(open("transformer.pkl","rb"))
-st.title("Score Prediction Model")
+st.title("Student Score Prediction Model")
 
 tab1,tab2=st.tabs(['User Input','Upload File'])
 
@@ -67,16 +67,16 @@ with tab2:
                 st.error(f"Error: {e}")
                 st.info("Check if your CSV column names match: Name, Age, Study Hours, Methodology")
 
-st.info("""
-### Data Requirements
-To ensure accurate predictions, please make sure your uploaded CSV file contains exactly three columns: 
-**Methodology**, **Age**, and **Study Hours**. 
+    st.info("""
+    ### Data Requirements
+    To ensure accurate predictions, please make sure your uploaded CSV file contains exactly three columns: 
+    **Methodology**, **Age**, and **Study Hours**. 
 
-**Important:**
-*   The **Methodology** values must be exactly: **Offline**, **Online**, or **Hybrid**.
-*   Column names are case-sensitive. 
-*   Providing unauthorized values or incorrect column names will cause the prediction to fail.
-""")
+    **Important:**
+    *   The **Methodology** values must be exactly: **Offline**, **Online**, or **Hybrid**.
+    *   Column names are case-sensitive. 
+    *   Providing unauthorized values or incorrect column names will cause the prediction to fail.
+    """)
 
 
 
