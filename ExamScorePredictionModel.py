@@ -44,10 +44,10 @@ with tab2:
             st.error("Please Upload a File")
         else:
             try:
-                # 1. Read the file
+                # 1. File Processing the file
                 fileFrame = pd.read_csv(file)
                 
-                # 2. Handle outliers ✅
+                # 2. Handling outliers 
                 for col in fileFrame.select_dtypes(include=["float64", "int64"]).columns:
                     Q1 = fileFrame[col].quantile(0.25)
                     Q3 = fileFrame[col].quantile(0.75)
@@ -58,12 +58,12 @@ with tab2:
                     Upper = Q3 + 1.5 * IQR
                     fileFrame[col] = fileFrame[col].clip(Lower, Upper)
 
-                # 3. Transform and Predict
+                # 3. Transforming  and Predicting 
                 fileTransform = combined.transform(fileFrame)
                 predictFile = gModel.predict(fileTransform)
                 actualScore = np.expm1(predictFile)
                 
-                # 4. Handle results
+                # 4. Handling  results
                 if len(actualScore) == 1:
                     st.success(f"Predicted Score: {actualScore[0]:.2f}")
                 else:
