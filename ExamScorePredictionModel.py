@@ -30,7 +30,8 @@ with tab1:
             df=pd.DataFrame({"Name":[name],"Age":[Age],"Study Hours":[Hours]})
             transform=combined.transform(df)
             predict=gModel.predict(transform)
-            st.success(predict)
+            actualScore=np.expm1(predict)
+            st.success(actualScore)
             
 with tab2:
     file=st.file_uploader("upload CSV",type="csv")
@@ -43,7 +44,8 @@ with tab2:
             fileFrame=pd.read_csv(file)
             fileTransform=combined.transform(fileFrame)
             predictFile=gModel.predict(fileTransform)
-            st.success(predictFile)
+            actualScore=np.expm1(predictFile)
+            st.success(actualScore)
 
 
 
