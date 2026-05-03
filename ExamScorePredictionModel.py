@@ -44,7 +44,7 @@ with tab2:
             st.error("Please Upload a File")
         else:
             try:
-                # 1. File Processing the file
+                # 1. Processing the file
                 fileFrame = pd.read_csv(file)
                 
                 # 2. Handling outliers 
