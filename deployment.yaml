@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: student-score-prediction-model
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: student-score-prediction-model
+  template:
+    metadata:
+      labels:
+        app: student-score-prediction-modeltext
+    spec:
+      containers:
+      - name: student-score-prediction
+        image: student-score-prediction-model
+        ports:
+        - containerPort: 8501
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
